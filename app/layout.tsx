@@ -11,6 +11,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ModeToggle } from "@/components/shared/mode-toggle";
+import { esMX } from "@clerk/localizations";
+import { Button } from "@/components/ui/button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider localization={{ locale: "es" }}>
+    <ClerkProvider localization={esMX}>
       <html lang="es" suppressHydrationWarning>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -44,11 +46,15 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <header className="flex justify-end items-center p-4 gap-4 h-16">
+            <header className="flex justify-end items-center p-4 gap-4">
               <ModeToggle />
               <SignedOut>
-                <SignInButton />
-                <SignUpButton />
+                <SignInButton>
+                  <Button>Iniciar sesión</Button>
+                </SignInButton>
+                <SignUpButton>
+                  <Button>Registrarse</Button>
+                </SignUpButton>
               </SignedOut>
               <SignedIn>
                 <UserButton />
